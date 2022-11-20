@@ -1,0 +1,90 @@
+﻿@model SnacksShop.Models.Product
+
+@{
+    ViewBag.Title = "Editproduct";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Edit products</h2>
+
+@using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<fieldset class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ProductId)
+    @Html.HiddenFor(model => model.ImageUrl)
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Name</label>
+        <div class="col-sm-4">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+
+        <label class="control-label col-sm-2">Category</label>
+        <div class="col-sm-4">
+            @Html.DropDownListFor(Model => Model.CateId, (SelectList)ViewBag.list, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CateId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Price</label>
+        <div class="col-sm-4">
+            @Html.EditorFor(model => model.MarketPrice, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MarketPrice, "", new { @class = "text-danger" })
+        </div>
+
+        <label class="control-label col-sm-2">Sale price</label>
+        <div class="col-sm-4">
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Time</label>
+        <div class="col-sm-4">
+            @Html.EditorFor(model => model.PostTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PostTime, "", new { @class = "text-danger" })
+        </div>
+
+        <label class="control-label col-sm-2">Stock</label>
+        <div class="col-sm-4">
+            @Html.EditorFor(model => model.Stock, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Image:</label>
+        <div class="col-sm-4">
+            <img src="@Html.DisplayFor(model => model.ImageUrl)" width="200" height="100" />
+            <input type="file" name="ImageUpload" id="ImageUpload" />
+            @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">Content</label>
+        <div class="col-sm-10">
+            @Html.TextAreaFor(model => model.Content, 10, 100, htmlAttributes: new { @class = "form-control text-area" })
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value=" Save " class="btn btn-default" />
+        </div>
+    </div>
+</fieldset>
+}
+
+<div>
+    @Html.ActionLink("Return to the list", "Index")
+</div>
+@Scripts.Render("~/bundles/jqueryval")

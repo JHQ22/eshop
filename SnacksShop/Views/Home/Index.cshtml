@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "HomePage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="clear"></div>
+
+<div class="main-content">
+    <div id="mid1" style="margin-top: 25px;">
+        <div class="row">
+            @foreach (var item in ViewBag.Products)
+            {
+                <div class="col-sm-2 col-md-2">
+                    <div class="thumbnail">
+                        <img src=@item.Photo />
+
+                        <div class="caption">
+                            <h3><a href="/Products/Details/@item.ProductId" 
+                                   target="_blank">@item.Title</a></h3>
+                            <p>
+                                <span class="price right">Price：<span>$@(item.Price)CAD</span></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

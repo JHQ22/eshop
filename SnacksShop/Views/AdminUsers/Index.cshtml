@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SnacksShop.Models.AdminUser>
+
+@{
+    ViewBag.Title = "AdminList";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Admin List</h2>
+
+
+<p class="pull-right">
+    @Html.ActionLink("Add Admin", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Username
+        </th>
+        <th>
+            Password
+        </th>
+        <th>
+            Role
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pwd)
+            </td>
+            <td>
+                @(item.role == 1 ? "Admin1" : "Admin2")
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SuId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SuId })
+            </td>
+        </tr>
+    }
+
+</table>

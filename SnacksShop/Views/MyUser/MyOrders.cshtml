@@ -1,0 +1,74 @@
+﻿@model PagedList<SnacksShop.Models.Orders>
+@{
+    ViewBag.Title = "Myorder";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="main-content">
+    <div>
+        <span style="font-size:14px;">
+            <a href="/MyUser/MyOrders">All</a>
+            | <a href="/MyUser/MyOrders?states=0">Unpaid</a>
+            | <a href="/MyUser/MyOrders?states=1">Paid</a>
+            | <a href="/MyUser/MyOrders?states=2">Shipped</a>
+            | <a href="/MyUser/MyOrders?states=3">Received</a>
+            | <a href="/MyUser/MyOrders?states=9">Closed</a>
+        </span>
+    </div>
+    <table id="car">
+        <tr class="th">
+            <td style="width: 100px">Order number</td>
+            <td style="width: 100px">Total</td>
+            <td style="width: 200px">Order time</td>
+            <td style="width: 100px">State</td>
+            <td style="width: 200px">Address</td>
+            <td style="width: 200px">Delete</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>@item.OrdersID</td>
+        <td>￥@item.Total</td>
+        <td>@item.Orderdate</td>
+        <td>@(item.States == 0 ? "Unpaid" : item.States == 1 ? "Paid" : item.States == 2 ? "Shipped" : item.States == 3 ? "Received" : item.States == 4 ? "Rated" : "Closed")</td>
+        <td>
+            @(item.Address == null ? "" : item.Address.Complete)
+        </td>
+        <td>
+            @if (item.States == 0)
+            {
+                <a href="/Car/OrderPay/@item.OrdersID?price=@item.Total" class="linkbutton">Pay Now</a>
+            }
+            else if (item.States == 2)
+            {
+        <a href="/MyUser/Confirm/@item.OrdersID" class="linkbutton">Confirm received</a>
+            }
+        </td>
+    </tr>
+            foreach (var detail in item.OrdersDetail)
+            {
+                <tr class="order-details">
+                    <td style="background-color: #fff !important;"></td>
+                    <td>Image</td>
+                    <td>Product</td>
+                    <td>Amount</td>
+                    <td>Price</td>
+                    <td>Total</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><img src="@detail.Product.ImageUrl" width="100px" height="100px" /></td>
+                    <td>@detail.Product.Title</td>
+                    <td>@detail.Quantity </td>
+                    <td>$@detail.Product.Price</td>
+                    <td>$@(detail.Quantity * detail.Product.Price)</td>
+                </tr>
+            }
+        }
+        <tr class="th">
+            <td colspan="6" id="total" style="text-align:right;padding-right:20px;">
+                @Html.Pager(Model).Options(o => o.SetPageIndexParameterName("id").SetHorizontalAlign("right").SetPagerItemTemplate("&nbsp;{0}"))
+            </td>
+        </tr>
+    </table>
+</div>

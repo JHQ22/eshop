@@ -1,0 +1,47 @@
+﻿@model SnacksShop.Models.Product
+
+@{
+    ViewBag.Title = "Product details";
+    Layout = "~/Views/Shared/_LayoutDetail.cshtml";
+}
+
+
+<div id="smalltitle">
+    <p> <span><a href="/Home/Index">Home page</a>></span><span id="order">@ViewBag.Title</span> </p>
+</div>
+<div id="photos">
+    <div id="pleft">
+        <div id="show">
+               <img src="@Model.ImageUrl" />
+        </div>
+    </div>
+    <div id="pright">
+        <div id="ptitle">@Model.Title</div>
+        <div>Price：<span class="price1">$ @Model.MarketPrice </span></div>
+        <div>Sale Price：<span class="price2">$ @Model.Price </span></div>
+        <div>In stock：<span class="stock"> @Model.Stock  </span></div>
+        <div id="pcount">
+            <a href="#">Sales <span class="red">@ViewBag.TotalSale</span> </a>
+        </div>
+        @using (Html.BeginForm("Add", "Car"))
+        {
+            <div id="op">
+                <input type="hidden" value="@Model.ProductId" id="id" name="id" />
+                <input type="submit" value="Add to Cart" class="btnop" />
+            </div>
+        }
+    </div>
+    <div style="clear:both"></div>
+</div>
+
+<div id="detail">
+    <ul>
+        <li style="border-top:3px solid red; height:38px;line-height:38px"><a href="/Products/Details/@Model.ProductId">Product details</a></li>
+    </ul>
+    <div id="content">
+        @Html.Raw(Model.Content)
+    </div>
+    <div id="images">
+        <img src="@Model.ImageUrl" />
+    </div>
+</div>

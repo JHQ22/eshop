@@ -1,0 +1,56 @@
+﻿@model SnacksShop.Models.Address
+
+@{
+    ViewBag.Title = "Edit shipping address";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<div class="main-content">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <fieldset class="form-horizontal">
+            <legend>Add shipping address information</legend>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.AddressID)
+            @Html.HiddenFor(model => model.UserId)
+
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Recipient：</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Consignee, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Consignee, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Address：</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Complete, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Complete, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Phone number：</label>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn" />
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

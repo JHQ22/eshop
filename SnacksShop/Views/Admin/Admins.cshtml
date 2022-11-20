@@ -1,0 +1,48 @@
+﻿@model PagedList<SnacksShop.Models.AdminUser>
+@{
+    ViewBag.Title = "Administrator list";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Administrator list</h2>
+
+<p>
+    @Html.ActionLink("Add Administrator", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Username
+        </th>
+        <th>
+            Password
+        </th>
+        <th>
+            Role
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pwd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.role)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SuId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.SuId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SuId })
+            </td>
+        </tr>
+    }
+</table>
+@Html.Pager(Model).Options(o => o.SetPageIndexParameterName("id").SetHorizontalAlign("right").SetPagerItemTemplate("&nbsp;{0}"))
+
+

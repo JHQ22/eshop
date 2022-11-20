@@ -1,0 +1,84 @@
+﻿@model SnacksShop.Models.Orders
+@{
+    ViewBag.Title = "Checkorder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <div id="smalltitle">
+        <p> <span><a href="#">Home Page</a>></span> <span>Account ></span> Check order</p>
+    </div>
+    <div id="central">
+        <div id="carlogo">
+            <ul>
+                <li id="carlogo1_cur">
+                    <p style="color:#fff;">1  My cart</p>
+                </li>
+                <li id="carlogo2_cur">
+                    <p style="color:#fff;">2 Check order information</p>
+                </li>
+                <li id="carlogo3">
+                    <p>3  Submit Order</p>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+
+        @using (Html.BeginForm("Order", "Car"))
+        {
+            <div id="address">
+                <h2>Shipping address <a href="/Address/Create" style="font-size:14px;">  +Add new address</a></h2><hr />
+                <div id="adds" style="padding-left:50px;margin:10px;">
+                    @foreach (var item in Model.Users.Address)
+                    {
+                        <p>
+                            <input type="radio" name="AddressID" value="@item.AddressID" @(item.AddressID == Model.AddressID ? "checked" : "") />
+                            @item.Consignee (@item.Phone) @item.Complete
+                        </p>
+                    }
+                <div class="form-group">
+                    description:
+                    @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control " } })
+                </div>   
+                </div>
+                <h2>Order information </h2><hr />
+            </div>
+            <table id="car">
+                <tr class="th">
+                    <td style="width: 120px; ">Image</td>
+                    <td style="width: 300px; ">Name</td>
+                    <td style="width: 100px; ">Price</td>
+                    <td style="width: 200px; ">Amount</td>
+                    <td style="width: 100px; ">Subtotal</td>
+                </tr>
+                @foreach (var item in Model.OrdersDetail)
+                {
+                    <tr>
+                        <td style="padding:5px"><img src="@item.Product.ImageUrl" width="100px" height="100px" /></td>
+                        <td>@item.Product.Title</td>
+                        <td>@String.Format("{0:C2}", item.Product.Price)</td>
+                        <td>@item.Quantity </td>
+                        <td>@String.Format("{0:C2}", item.Quantity * item.Product.Price)<input type="hidden" name="OrdersDetail" value="@item." /></td>
+
+                    </tr>
+                }
+
+                <tr class="th">
+
+                    <td colspan="6" id="total" style="text-align:right;padding-right:20px;">Total:@ViewBag.Total <input type="hidden" name="Total" value="@ViewBag.Total" /></td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="text-align:center; padding-bottom: 20px;">
+                        @if (Model.OrdersDetail.Count > 0)
+                        {
+                            <input type="submit" value=" Submit " class="btn" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        }
+
+        <div style="color: red">@TempData["msg"]</div>
+    </div>
+
+</div>

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<SnacksShop.Models.Product>
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Category cate = (Category)ViewBag.category;
+}
+    <div class="main-content">
+        <div id="smalltitle">
+            <p>
+                <span><a href="/Home/Index">Home Page</a>> Categories > @cate.CateName </span>
+            </p>
+        </div>
+        <div class="products">
+            @foreach (Product item in Model.ToList<SnacksShop.Models.Product>())
+            {
+                <dl>
+                    <dt><a href="/Products/Details/@item.ProductId"><img src='@item.ImageUrl'/></a></dt>
+                    <dd><a href="/Products/Details/@item.ProductId">@item.Title  @String.Format("{0:C2}", item.Price)  </a></dd>
+                </dl>
+            }
+            <div class="clear"></div>
+        </div>
+    </div>

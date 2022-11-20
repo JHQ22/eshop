@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>E-Commerce Website- @ViewBag</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+        <div class="login">
+            <div class="login-title">Login</div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="red">@ViewBag.msg</div>
+            @using (Html.BeginForm("Login", "Home"))
+            {
+                <div class="login-content">
+                    <div class="login-row">
+                        <span class="span">Username：</span>
+                        <input type="text" name="UserName" class="text" placeholder="Username" />
+
+                    </div>
+                    <div class="login-row">
+                        <span class="span">Password：</span>
+                        <input type="password" name="Pwd" class="text" placeholder="Password" />
+                    </div>
+                    <div class="login-row" style="text-align: center; margin-top: 25px">
+                        <input type="submit" class="btn btn-info" value="Sign in" /><br />
+                        <a href="/Home/Register" style="margin-top: 20px;">Sign up</a>
+                    </div>
+                </div>
+            }
+        </div>
+</body>
+</html>
+
+

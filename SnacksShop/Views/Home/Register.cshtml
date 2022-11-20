@@ -1,0 +1,86 @@
+﻿@model SnacksShop.Models.Users
+@{
+    ViewBag.Title = "Signup";
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>E-Commerce Website- @ViewBag</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="all">
+        <div id="head" style="background: #2776f9;">
+            <ul>
+                <li id="headone">
+                    <a href="/Home/Index" style="color: #fff; font-size: 20px;">
+                        E-Commerce Website
+                    </a>
+                </li>
+                <li id="headtwo" style="color: #fff">
+                    <a href="/Home/Index" style="color: #fff">Home Page</a>
+                    <a href="/Home/Login" style="color: #fff">【Sign in】</a>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div id="middle form-horizontal">
+            <div id="register" style="width:600px; margin:0px auto;">
+                <h2>Sign Up</h2>
+                <hr />
+                @using (Html.BeginForm("Register", "Home"))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Username:</label>
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Password:</label>
+                        <div class="col-md-10">
+                            @Html.PasswordFor(model => model.Pwd, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Pwd, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Email:</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Nickname:</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nick, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nick, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <input type="submit" class="btn" value="Sign up" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

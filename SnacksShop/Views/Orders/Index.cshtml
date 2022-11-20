@@ -1,0 +1,79 @@
+﻿@model PagedList<SnacksShop.Models.Orders>
+
+@{
+    ViewBag.Title = "Order List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>@ViewBag.Title  
+    <span style="font-size:14px;">
+        <a href="/Orders/Index">All</a>
+        | <a href="/Orders/Index?states=0">Unpaid</a>
+        | <a href="/Orders/Index?states=1">Paid</a>
+        | <a href="/Orders/Index?states=2">Shipped</a>
+        | <a href="/Orders/Index?states=3">Received</a>
+        | <a href="/Orders/Index?states=9">Closed</a>
+    </span></h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Order time
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Time of receipt
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            Recipient
+        </th>
+        <th>
+            User
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Orderdate)
+        </td>
+        <td>
+            ￥@Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveryDate)
+        </td>
+        <td>
+            @(item.States == 0 ? "Unpaid" : item.States == 1 ? "paid" : item.States == 2 ? "Shipped" : item.States == 3 ? "Received" : item.States == 4 ? "Rated" : "Closed")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address.Consignee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users.UserName)
+        </td>
+        <td style="text-align: center">
+            @Html.ActionLink("Details", "Details", new { id = item.OrdersID }, htmlAttributes: new { @target = "_blank" })
+            @if (item.States == 0)
+            {
+                <a href="/Orders/Close/@item.OrdersID" class="linkbutton"> Close order </a>
+            } 
+            else if (item.States == 1)
+            {
+        <a href="/Orders/Send/@item.OrdersID" class="linkbutton"> Ship </a>
+            }
+
+        </td>
+    </tr>
+}
+    <tr><td colspan="6">
+    @Html.Pager(Model).Options(o => o.SetPageIndexParameterName("id").SetHorizontalAlign("right").SetPagerItemTemplate("&nbsp;{0}"))
+
+</td></tr>
+</table>

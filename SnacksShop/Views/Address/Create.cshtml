@@ -1,0 +1,70 @@
+﻿@model SnacksShop.Models.Address
+
+@{
+    ViewBag.Title = "Shipping address";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    Users user = (Users)ViewBag.User;
+}
+
+<div class="main-content">
+    @using (Html.BeginForm())
+    {
+        <fieldset class="form-horizontal">
+            <legend>Add shipping address information</legend>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @*@Html.HiddenFor(model => model.UserId, new { @Value = user.UserId })*@
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Recipient：</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Consignee, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Consignee, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Address：</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Complete, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Complete, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Phone number：</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value=" Save " class="btn btn" />
+                </div>
+            </div>
+            <h2>Shipping Address </h2><hr />
+            <div id="adds" style="padding-left:50px;margin:10px;">
+                @foreach (var item in user.Address)
+                {
+                    if (user.AddressID == item.AddressID)
+                    {
+                        <p style=" color: #0150F9;">
+                            <b>@item.Consignee (@item.Phone) @item.Complete (Default Address)</b>
+                            <a href="/Address/Edit/@item.AddressID"> 【edit】 </a>
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            @item.Consignee (@item.Phone) @item.Complete
+                            <a href="/Address/Edit/@item.AddressID"> 【edit】 </a>
+                            <a href="/Address/Delete/@item.AddressID"> 【delete】 </a>
+                            <a href="/Address/SetDefault/@item.AddressID"> 【Set this address to default】 </a>
+                        </p>
+                    }
+                }
+            </div>
+        </fieldset>
+    }
+</div>

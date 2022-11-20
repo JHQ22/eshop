@@ -1,0 +1,72 @@
+﻿@model SnacksShop.Models.Product
+
+@{
+    ViewBag.Title = "Removeproducts";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Remove products</h2>
+
+<h3>Are you sure to delete?</h3>
+<fieldset class="form-horizontal">
+    <legend>Product information</legend>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MarketPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MarketPrice)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd>
+            @Html.Raw(Model.Content)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PostTime)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stock)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stock)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=" Delete " class="btn btn-default" /> |
+            @Html.ActionLink("Return to the list", "Index")
+        </div>
+    }
+ </fieldset>

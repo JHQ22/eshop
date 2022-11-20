@@ -1,0 +1,68 @@
+﻿@model PagedList<SnacksShop.ViewModel.ProductModel>
+
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Product List</h2>
+
+<p class="pull-right">
+    @Html.ActionLink("Add new products", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Image
+        </th>
+        <th>
+           Name
+        </th>
+        <th>
+           Price
+        </th>
+        <th>
+           Sale Price
+        </th>
+        <th>
+           Stock
+        </th>
+        <th>
+           Category
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+            @if(!string.IsNullOrEmpty(item.Photo))
+            { 
+                <img src="@Html.DisplayFor(modelItem => item.Photo )" style="width:100px;height:50px;" />
+            }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductId }, new { target = "_blank" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId }, new { onclick = "return confirm('Are you sure you want to delete this data?')" })
+            </td>
+        </tr>
+    }
+</table>
+@Html.Pager(Model).Options(o => o.SetPageIndexParameterName("id").SetHorizontalAlign("right").SetPagerItemTemplate("&nbsp;{0}"))

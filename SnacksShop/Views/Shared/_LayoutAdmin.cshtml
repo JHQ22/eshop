@@ -1,0 +1,39 @@
+﻿@using SnacksShop.App_Start;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>E-CommerceWebsite Admin - @ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/Content/admin.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div class="header">
+        <div class="logo">E-CommerceWebsite Admin</div>
+        <div class="header-info">
+            Welcome，<span style="color: red">@(MyAuthentication.GetUserName()) </span>
+            <a href="/Home/Index" target="_blank">Home page</a>
+            <a href="/Admin/Logout">Log out</a>
+        </div>
+    </div>
+    <div class="left">
+        <ul>
+            <li class="menu"><a href="/Admin/Index">Main page</a></li>
+            <li class="menu"><a href="/Products/Index">Product management</a></li>
+            <li class="menu"><a href="/Orders/Index">Order management</a></li>
+            <li class="menu"><a href="/Users/Index">User management</a></li>
+            <li class="menu"><a href="/AdminUsers/Index">Admin management</a></li>
+        </ul>
+    </div>
+    <div class="right">
+        <div class="content">
+            <section>
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

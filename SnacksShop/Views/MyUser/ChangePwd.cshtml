@@ -1,0 +1,52 @@
+﻿@model SnacksShop.Models.Users
+
+@{
+    ViewBag.Title = "Change Password";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+    <div class="main-content">
+        <h2>@ViewBag.Title </h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <fieldset class="form-horizontal">
+                <legend>Password</legend>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.UserId)
+
+            <div class="form-group">
+                
+                <label class="control-label col-md-2">Old password：</label>
+                <div class="col-md-4">
+                    <input type="Password" name="OldPwd" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.Pwd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">New password：</label>
+                    <div class="col-md-4">
+                        <input type="Password" name="NewPwd" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.Pwd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">Confirm new password：</label>
+                    <div class="col-md-4">
+                        <input type="Password" name="NewPwd2" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.Pwd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value=" Confirm " class="btn" />
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>

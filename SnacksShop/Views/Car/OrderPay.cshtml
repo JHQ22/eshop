@@ -1,0 +1,49 @@
+﻿@model SnacksShop.Models.Orders
+@{
+    ViewBag.Title = "Pay order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div id="smalltitle">
+        <p> <span><a href="#">Home page</a>></span> <span>Account ></span> Pay order</p>
+    </div>
+    <div id="central">
+        <div id="carlogo">
+            <ul>
+                <li id="carlogo1_cur">
+                    <p style="color:#fff;">1  My cart</p>
+                </li>
+                <li id="carlogo2_cur">
+                    <p style="color:#fff;">2 Check order information</p>
+                </li>
+                <li id="carlogo3_cur">
+                    <p style="color:#fff;">3  Submit Order</p>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div id="address">
+            <div id="adds" style="padding-left:50px;margin:10px;">
+                <dl style="overflow:hidden;">
+                    <dt style="float:left;"><img src="~/images/icon/Check.png" /> </dt>
+                    <dd style="margin-left:80px;margin-top:5px;">
+                        <span id="success" style="font-size:20px;">
+                            The order is submitted successfully, the amount payable
+                            <span class="red">@TempData["Total"]</span>CAD
+                        </span><br />
+                        Order number：@Model.OrdersID Please complete the payment within 1 day, otherwise the order will be automatically canceled.
+                    </dd>
+                </dl>
+            </div>
+            <hr />
+        </div>
+        <div id="car">
+            @using (Html.BeginForm("Index", "Pay", FormMethod.Post))
+            {
+                @Html.Hidden("id", Model.OrdersID)
+                @Html.Hidden("money", Model.Total)
+                <input type="submit" value="Pay now" class="btn" style="margin-top: 0; margin-bottom: 20px" />
+            }
+        </div>
+    </div>
+</div>

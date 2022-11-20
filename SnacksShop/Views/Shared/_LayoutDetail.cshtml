@@ -1,0 +1,41 @@
+﻿@using SnacksShop.App_Start;
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>E-CommerceWebsite-@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div id="fix">
+        <ul class="pull-right">
+            <li class="pull-right">
+                <a href="/Home/Index">Home page</a>
+                | <a href="/MyUser/Myinfo">Account</a>
+                | <a href="/Car/Index">My cart</a>
+                | <a href="/Admin/Index" target="_blank">Administration</a>
+            </li>
+
+            @if (MyAuthentication.IsLoging() && MyAuthentication.GetRights() == "user")
+            {
+                <li class="pull-right">Welcome <span style="color:red;"> @MyAuthentication.GetUserName() </span>  【<a href="/Home/Logout">Log out</a>】</li>
+            }
+            else
+            {
+        <li class="pull-right">Welcome to E-Commerce Website【 <a href="/Home/Login">Sign in</a> | <a href="/Home/Register">Sign up</a> 】</li>
+            }
+
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div id="middle">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

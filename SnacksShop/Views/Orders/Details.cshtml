@@ -1,0 +1,44 @@
+﻿@model SnacksShop.Models.Orders
+
+@{
+    ViewBag.Title = "Orderdetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="address">
+    <h2>Order details </h2><hr />
+    <div id="adds" style="padding-left:50px;margin:10px;">
+        <p> Order User：@Model.Users.UserName </p>
+        <p> Order time：@Model.Orderdate </p>
+        <p> Shipping address：@Model.Address.Consignee (@Model.Address.Phone)  @Model.Address.Complete </p>
+
+        <p> description：@Model.Remark</p>
+        <p> State：@(Model.States == 0 ? "Unpaid" : Model.States == 1 ? "Paid" : Model.States == 2 ? "Shipped" : Model.States == 3 ? "Received" : Model.States == 4 ? "Rated" : "Closed") </p>
+    </div>
+    <h2>Order </h2><hr />
+    <table id="car">
+        <tr class="th">
+            <td style="width: 100px; ">Image</td>
+            <td style="width: 200px; ">Name</td>
+            <td style="width: 100px; ">Price</td>
+            <td style="width: 200px; ">Amount</td>
+            <td style="width: 100px; ">Subtotal</td>
+        </tr>
+        @foreach (var item in Model.OrdersDetail)
+        {
+            <tr>
+                <td><img src="@item.Product.ImageUrl" width="100px" height="100px" /></td>
+                <td>@item.Product.Title</td>
+                <td>@String.Format("{0:C2}",item.Product.Price) </td>
+                <td>@item.Quantity </td>
+                <td>@String.Format("{0:C2}", item.Quantity * item.Product.Price) </td>
+            </tr>
+        }
+        <tr class="th">
+            <td colspan="6" id="total" style="text-align:right;padding-right:20px;">Total:@String.Format("{0:C2}", Model.Total)  </td>
+        </tr>
+    </table>
+    <p style="margin-left:30px;">
+        @Html.ActionLink("Return to the list", "Index")
+    </p>
+</div>

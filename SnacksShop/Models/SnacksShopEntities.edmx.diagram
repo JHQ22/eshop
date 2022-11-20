@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8aeb1aed53044fb9906eee3173116a10" Name="Diagram1">
+        <EntityTypeShape EntityType="SnacksShopDBModel.Address" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SnacksShopDBModel.AdminUser" Width="1.5" PointX="6.625" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SnacksShopDBModel.Orders" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SnacksShopDBModel.OrdersDetail" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SnacksShopDBModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SnacksShopDBModel.Users" Width="1.5" PointX="1.5" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="SnacksShopDBModel.FK_Address_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SnacksShopDBModel.FK_Orders_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="SnacksShopDBModel.FK_Users_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="SnacksShopDBModel.FK__OrdersDet__Order__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="SnacksShopDBModel.FK__OrdersDet__Produ__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="SnacksShopDBModel.FK_Orders_Users" />
+        <EntityTypeShape EntityType="SnacksShopDBModel.Category" Width="1.5" PointX="0.75" PointY="1.75" />
+        <AssociationConnector Association="SnacksShopDBModel.FK__Product__CateId__31EC6D26" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
